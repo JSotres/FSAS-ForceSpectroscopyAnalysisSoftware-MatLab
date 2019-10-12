@@ -1,0 +1,36 @@
+Experiments on mica in air
+cantilever: olympus short wide
+
+000
+FZ
+ramp 300nm
+number samples 512
+
+001
+FZ
+ramp 300nm
+number samples 512
+
+002
+FV
+Scan size 2000
+ramp 300
+number samples 512
+samples per line 64
+force per line 64
+
+003
+FV
+Scan size 2000
+ramp 300
+number samples 512
+samples per line 64
+force per line 16
+
+004
+FV
+Scan size 2000
+ramp 300
+number samples 1024
+samples per line 64
+force per line 16
