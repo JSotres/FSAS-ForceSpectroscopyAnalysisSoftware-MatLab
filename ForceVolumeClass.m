@@ -1,14 +1,15 @@
 classdef ForceVolumeClass < handle
     % Class definition of Force Volume Objects
-    %   Detailed explanation goes here
     
     properties (Access = public)
-        % General Properties
-        Ramp; % Force distance ramp
-        %MapRepresentation;  % handle to the map/image on to which actions will apply
-        NumberOfMapRows;    % Number of rows in the FV file
-        NumberOfMapColumns; % Number of columns in the FV file
-        MapLength           % Lateral dimension of the probed area 
+        % Force distance ramp
+        Ramp
+        % Number of rows in the FV file
+        NumberOfMapRows
+        % Number of columns in the FV file
+        NumberOfMapColumns
+        % Lateral dimension of the probed area
+        MapLength            
         
     end
     
@@ -26,14 +27,21 @@ classdef ForceVolumeClass < handle
                 case 2                    
                 % This indicates that the object corresponds to a list of
                 % force distance ramps, and it is created by calling the 
-                % function
-                % LoadForceRamps
+                % function LoadForceRamps
                     fv.Ramp = LoadForceRamps(FileName, FilePath);
+                    % Identification of the number of Ramps, number
+                    % assigned to NumberOfMapRows in order to keep the same
+                    % nomenclature as in the case of analysis of force
+                    % volume files
                     if iscell(FileName)
+                        % If several files are loaded
                         fv.NumberOfMapRows = size(FileName, 2);
                     else
+                        % If only one file is loaded
                         fv.NumberOfMapRows = 1;
                     end
+                    % The nuber of columns in a set of Ramps will always be
+                    % 1
                     fv.NumberOfMapColumns = 1;                
             end
         end
@@ -80,12 +88,6 @@ classdef ForceVolumeClass < handle
             end
             close(h);
         end
-        
-%         function outputArg = method1(obj,inputArg)
-%             %METHOD1 Summary of this method goes here
-%             %   Detailed explanation goes here
-%             outputArg = obj.Property1 + inputArg;
-%         end
     end
 end
 
