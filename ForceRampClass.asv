@@ -206,23 +206,15 @@ classdef ForceRampClass < handle
                 'Lower', [param.MinP1, -1/param.MinP2],...
                 'Upper', [param.MaxP1, -1/param.MaxP2],...
                 'StartPoint',[param.StartP1 -1/param.StartP2]);
-            
-            % Further actions to be taaken if the fit parameters do not
-            % equal the minimium or maximum limits
             c=coeffvalues(f);
             if (c(1) ~= param.MinP1) && (c(1) ~= param.MaxP1) &&...
                     (c(2) ~= param.MinP2) && (c(2) ~= param.MaxP2)
-                % Defines the amplitude, Property(10), and characteristic
-                % length, Property(11), of the exponential fit
                 fz.Property(10) = c(1);
                 fz.Property(11) = -1/c(2);
-                
-                % Defines 1D arrays (X and Y) for the exponential fit
                 fz.ExpX = [];
                 fz.ExpY = [];
                 fz.ExpX = xData(IndMinF:IndMaxF);
                 fz.ExpY = c(1)*exp(c(2)*fz.ExpX);
-                
                 %Indicates that the ramp was analyzed with an exponential
                 %fit
                 fz.AnalysisRepresentation(3) = 1;

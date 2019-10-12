@@ -16,12 +16,7 @@ function [E, x0, xData, yData] =...
 % yData -> sample vertical values derived from the Hertz fit
 %
 % NOTE: different units for the used quantities are not supported in this
-% version. It is assumed that:
-% xOriginal, yOriginal and R are provided in [nm]
-% kc is`provided in [nm]
-% If so:
-% Units of x0, xData and yData are [nm]
-% Units of E are GPa
+% version. It is assumed that 
 
 [xData,Ydata] = Ordenar(xOriginal,yOriginal);
 Hertz_FitType = fittype(@(K2,Z0,x) -K2*x.^(2/3)-x+Z0);
