@@ -6,19 +6,12 @@ function PlotHistInExternalFigure(Map, MapRepresentation,...
 % Input Parameters:
 % Map -> contains a field "Value" used for histogram calculation
 % MapRepresentation -> different number for different information contained
-% in Map.Values. Here used only for determining label of X axis. 
-%   Possible values:
-%       3: height/topography
-%       5: slope
-%       6: young modulus
-%       8: adhesion force
-%       9: adhesion work
-%       10: exponential amplitude
-%       11: exponential length 
-% HistMin -> Minimum value of the X axis in the histogram
-% HistMax -> Maximum value of the X axis in the histogram
-% HistBins -> Number of bins in the histogram
-
+% in Map.Values. Here used only for determining label of X axis. Possible
+% values:
+% 3: height/topography
+% 5: slope
+% 6: young modulus
+% 8: adhesion force
 
 % Opens an external figure and plots a histogram of the input parameter Map
 figure;
@@ -43,8 +36,6 @@ switch MapRepresentation
         xlabel('Young Modulus (GPa)');
 	case 8
         xlabel('Adhesion Force (nN)');
-	case 9
-        xlabel('Adhesion Work (nN*nm)');
 	case 10
         xlabel('Exponential Amplitude (nm)');
     case 11
