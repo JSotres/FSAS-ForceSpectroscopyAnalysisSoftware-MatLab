@@ -15,9 +15,9 @@ if FZ.FZRepresentationX(RampXRepresentation) == 1 &&...
         plot(FZ.XF(:,RampXRepresentation), FZ.YF(:,RampYRepresentation), 'o','MarkerSize',1);
         hold on;
         if RampXRepresentation ~= 1 && RampYRepresentation ~= 1 && RampYRepresentation ~= 2
-            plot(FZ.XHertz(:, RampXRepresentation-1), FZ.YHertz(:,RampYRepresentation-2), 'g','LineWidth',2);
+            plot(FZ.HertzX(:, RampXRepresentation-1), FZ.HertzY(:,RampYRepresentation-2), 'g','LineWidth',2);
         end
-        if RampXRepresentation == 3 && RampYRepresentation == 4 && FZ.AnalysisRepresentation(2) == 1
+        if RampXRepresentation == 3 && RampYRepresentation == 4 && FZ.AnalysisRepresentation(3) == 1
             plot(FZ.ExpX, FZ.ExpY, 'm','LineWidth',2);
         end
     end
