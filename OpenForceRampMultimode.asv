@@ -9,15 +9,7 @@ function [XF, YF, XB, YB] = OpenForceRampMultimode(file_name)
 % Input Parameter:
 %   file_name -> name of the force ramp file to be read
 %
-% Output parameters:
-%   XF -> 1D array of the sample vertical positions while approaching the
-%         probe (forward direction).
-%   XB -> 1D array of the sample vertical positions while withdrawing from
-%         the probe (backward direction).
-%   YF -> 1D array of the absolute photodetector values while approaching
-%         the probe (forward direction).
-%   YB -> 1D array of the absolute photodetector values while withdrawing
-%         from the probe (backward direction).
+% Output parameters
 % 
 % Author: Javier Sotres
 % email: javier.sotres@mau.se
