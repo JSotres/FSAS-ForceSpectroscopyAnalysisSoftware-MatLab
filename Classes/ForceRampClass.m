@@ -26,7 +26,7 @@ classdef ForceRampClass < handle
         % 1D array indicating whether a given analysis for a Ramp was
         % performed (value 1) or not (value 0)
         % 1 -> Hertz Offset
-        % 2 -> Slope
+        % 2 -> Linear fit
         % 3 -> Exponetial fit
         AnalysisRepresentation
        
@@ -35,7 +35,7 @@ classdef ForceRampClass < handle
         % 2 -> yposition
         % 3 -> height
         % 4 -> selected
-        % 5 -> slope
+        % 5 -> slope of linear fit
         % 6 -> Young modulus
         % 7 -> contact point
         % 8 -> maximum adhesion
@@ -47,9 +47,9 @@ classdef ForceRampClass < handle
         % Properties consisting on 1-d arrays used for representing fits of
         % the Ramps
         %
-        % For Slope Fit
-        SlopeX
-        SlopeY
+        % For Linear Fit
+        LinearFitX
+        LinearFitY
         % For Hertz Fit
         HertzX
         HertzY
@@ -57,10 +57,10 @@ classdef ForceRampClass < handle
         ExpX
         ExpY
         
-        % For the slope fit, two more properties are used indicating the X
+        % For the linear fit, two more properties are used indicating the X
         % and Y representations used
-        SlopeXRepresentation
-        SlopeYRepresentation
+        linearFitRepresentationX
+        linearFitRepresentationY
         
         % Name/title of the ramp, corresponds to the name of the file if
         % individual ramps are loaded, and it is left empty if a force
@@ -181,13 +181,51 @@ classdef ForceRampClass < handle
             end
         end
         
-        function ProbeSampleDistanceConverter(fz, param)
+        function ProbeSampleDistanceConverter(fz, ~)
             % Finds probe-sample distance representation for a Ramp
             fz.XF(:,3) = TSDistanceConverter(fz.XF(:,2),fz.YF(:,3));
             fz.XB(:,3) = TSDistanceConverter(fz.XB(:,2),fz.YB(:,3));
             % Indicate that the probe-sample distance represntation was
             % found
             fz.FZRepresentationX(3) = 1;
+        end
+        
+        function LinearFitRamp(fz, param, xRepresentation, yRepresentation)
+            % Fit user defined region of the ramp in the "xRepresentation"
+            % and "yRepresentation" with a linear function y=slope*x+y0
+            
+            % For safety, XF(:,xRepresentation) and YF(:,yRepresentation)
+            % are arranged in incremental values of XF(:,xRepresentation),
+            % which is done by calling the external function "Ordenar"
+            [xData, yData] =...
+                Ordenar(fz.XF(:,xRepresentation),fz.YF(:,yRepresentation));
+            
+            % Identification of the indices of xData (and yData)
+            % corresponding to the values within the range provided as
+            % fields of "param"
+            [IndMinF, IndMaxF] =...
+                FromRange2Indexes(xData, param.xForwardMin, param.xForwardMax);
+            
+            % Actual linear fit
+            f = polyfit(xData(IndMinF:IndMaxF), yData(IndMinF:IndMaxF), 1);
+            
+            % Defines the slope of the linear fit
+            fz.Property(5) = f(1);
+            
+            % Defines 1D arrays (X and Y) for the linear fit
+            fz.LinearFitX = [];
+            fz.LinearFitY = [];
+            fz.LinearFitX = xData(IndMinF:IndMaxF);
+            fz.LinearFitY= polyval(f, fz.LinearFitX);
+            
+            %Indicates that the ramp was analyzed with an exponential
+            %fit
+            fz.AnalysisRepresentation(2) = 1;
+            
+            % Indicates the X and Y representations from which the linear
+            % fit was found
+            fz.linearFitRepresentationX = xRepresentation;
+            fz.linearFitRepresentationY = yRepresentation;
         end
         
         function ExponentialFitRamp(fz, param)
@@ -207,7 +245,7 @@ classdef ForceRampClass < handle
                 'Upper', [param.MaxP1, -1/param.MaxP2],...
                 'StartPoint',[param.StartP1 -1/param.StartP2]);
             
-            % Further actions to be taaken if the fit parameters do not
+            % Further actions to be taken if the fit parameters do not
             % equal the minimium or maximum limits
             c=coeffvalues(f);
             if (c(1) ~= param.MinP1) && (c(1) ~= param.MaxP1) &&...

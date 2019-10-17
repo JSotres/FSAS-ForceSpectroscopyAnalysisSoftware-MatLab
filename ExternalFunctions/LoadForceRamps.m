@@ -29,6 +29,12 @@ for i=1:NumberOfFiles
     for j=5:11
         Ramp{i, 1}.Property(j) = NaN;
     end
+    % For linear fitting: this fit is supported in all X and Y
+    % representations, but only for one representation at a time. The
+    % properties linearFitRepresentationX and linearFitRepresentationY
+    % identify the representations for which the linear fit applies
+    Ramp{i, 1}.linearFitRepresentationX = NaN;
+    Ramp{i, 1}.linearFitRepresentationY = NaN;
 end
 
 

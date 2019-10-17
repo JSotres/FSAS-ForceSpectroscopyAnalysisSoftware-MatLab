@@ -77,6 +77,16 @@ classdef ForceVolumeClass < handle
             end
         end
         
+        function LinearFit(fv, Selection, AnalysisParameters, xRepresentation, yRepresentation)
+            [row, col, ~] = find(Selection);
+            h = waitbar(0,'Calculating Linear Fits');
+            for i = 1:length(row)
+                fv.Ramp{row(i),col(i)}.LinearFitRamp(AnalysisParameters, xRepresentation, yRepresentation);
+                waitbar(i/length(row), h);
+            end
+            close(h);
+        end
+        
         function ExponentialFit(fv, Selection, AnalysisParameters)
             [row, col, ~] = find(Selection);
             h = waitbar(0,'Calculating Exponential Fits');

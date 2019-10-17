@@ -139,7 +139,7 @@ for NXPixel=1:NumberOfMapRows
         % A similar notation is used to determine if different
         % fits/analysis have been applied to the ramps.
         % AnalysisRepresentation(1) -> Hertz Fit
-        % AnalysisRepresentation(2) -> Slope
+        % AnalysisRepresentation(2) -> Linear fit
         % AnalysisRepresentation(3) -> Exponential Fit
         Ramp{NXPixel,NYPixel}.AnalysisRepresentation = [0 0 0];
         % Initializes propertie of the object Ramp "selected", which 
@@ -166,6 +166,13 @@ for NXPixel=1:NumberOfMapRows
         Ramp{NXPixel,NYPixel}.Property(10) = NaN;        
         % (Exponential Length) 
         Ramp{NXPixel,NYPixel}.Property(11) = NaN;
+        %
+        % For linear fitting: this fit is supported in all X and Y
+        % representations, but only for one representation at a time. The
+        % properties linearFitRepresentationX and linearFitRepresentationY
+        % identify the representations for which the linear fit applies
+        Ramp{NXPixel,NYPixel}.linearFitRepresentationX = NaN;
+        Ramp{NXPixel,NYPixel}.linearFitRepresentationY = NaN;
     end
 end
 
