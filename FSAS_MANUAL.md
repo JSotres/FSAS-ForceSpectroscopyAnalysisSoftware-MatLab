@@ -21,27 +21,17 @@ Load force ramps and force volume files obtained with the Bruker Nanoscope softw
 Different apps will open depending on wether [force ramps](#force-ramp-analysis-app) or a [force volume](#force-volume-analysis-app) file are loaded.
 
 ## 3. Force Ramp Analysis App
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-..
+### 3.1. Graphical Interface
+This graphical interface contains one axes for plotting force ramps. Below the Force Ramp Axes there
+are edit boxes for setting limits of the force ramp plots in both horizontal and vertical dimensions.
+### 3.2. Menu
+#### 3.2.1. FZ View
+#### 3.2.2. FZ Analysis
+#### 3.2.3. Export
 
 
 ## 4. Force Volume Analysis App
-### Graphical Interface
+### 4.1. Graphical Interface
 The graphical interface contains two axes. The one on the left is used for plotting force ramps.
 The one in the right is used for plotting maps. By maps we refer to either the topography (height)
 of the sample, or a characteristic quantity calculated for each pixel/point of the scanned area. 
@@ -52,8 +42,46 @@ horizontal and vertical dimensions.
 Below the Map Axes there are buttons for navigating along the map. As one navigates along the map, 
 the ramp shown in the Ramp Axes changes so that it always represents that obtained in the pixel/point
 highlighted in the Map.
-At the right of the map, a text area is shown with different quantities associted with the current visualized pint/ramp.
-.
-.
-.
-.
+At the right of the map, a text area is shown with different quantities associted with the current
+visualized point/ramp.
+### 4.2. Menu
+#### 4.2.1. FZ View
+This menu allows calling methods related to the way force ramps are visualized in the FSAS software.
+**Scan Direction**
+Allows choosing the direction of the visualized Force Ramp. This can vary between forward (sample approaching 
+the probe=, backward (sample withdrawing from the probe<9, or both.
+**X Representation**
+Allows changing representation
+**Y Representation**
+Allows changing representation
+**External Figure**
+Plots thevisualized ramp in an external Matlab figure.
+
+#### 4.2.2. FZ Analysis
+**Y Offset**
+-
+
+
+**Ramp Calibration**
+-
+
+**X Offset**
+-
+
+**Probe-Sample Distance**
+-
+
+**Linear Fit**
+**Exponential Fit**
+-
+#### 4.2.3. Map View
+#### 4.2.4. Map Analysis
+**Selection**
+-
+
+**Histogram**
+-
+
+#### 4.2.5. Export
+**MatLab Structure**
+-
