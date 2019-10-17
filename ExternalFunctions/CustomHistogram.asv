@@ -17,15 +17,6 @@ function CustomHistogram(Quantity,Representation, Min, Max, NBins)
 %   - Max -> maximum value of quantity to be used for both calculating and
 %   plotting the histogram.
 %   - NBins -> number of bins in the histogram.
-% 
-% Last updated: 17-10-2019 by Javier Sotres.
-%
-% Javier Sotres
-% Biomedical Science, 
-% Faculty of Health and Society, Malmo University
-% Malmo, Sweden 
-% Email: javier.sotres@mau.se
-% http://www.mah.se/sotres
 
 % Calculate the size of the bins, in term of units of the quantity to be
 % plotted
@@ -69,19 +60,17 @@ actual_gaussian_fit =...
 
 % Initialize the variable Coefficients with the values dfound in the fit
 % for the fitting parameters:
-% Coefficients = [gaussian_amplitude expected_value gaussian_RMS_width]
+% Coefficients = [gaussian_amplitude gaussian_RMS_width
 Coefficients=coeffvalues(actual_gaussian_fit);
 
-% Plots the normalized histogram in an external figure
 figure;
 bar(HistX, HistYN);
 
-% Plots the gaussian fit on topof the histogram
 hold on
 xfit=Min:0.001:Max;
 plot(xfit, actual_gaussian_fit(xfit), 'LineWidth', 2);
 
-% Sets label of X axis according to the provided "Representation" input
+% Sets label of X axis according to the provided MapRepresentation input
 % parameter
 switch Representation
 	case 3
@@ -100,16 +89,14 @@ switch Representation
         xlabel('Exponential Length (nm)');
 end
 
-% Adds a text box in the figure with the fitting parameters values found in
-% the the gaussian fit. Specifically those for the expected value and for
-% the gaussian RMS width
 dim = [0.2 0.5 0.3 0.3];
+
 str1 =...
     {strcat('mu: ', num2str(Coefficients(2))),...
     strcat('sigma: ', num2str(Coefficients(3)))};
+
 annotation('textbox',dim,'String',str1,'FitBoxToText','on');
 
-%Incorporates a legend in the figure
 legend ('data', 'normal distribution fit')
 
 % Sets label for Y axis
