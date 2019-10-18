@@ -1,6 +1,18 @@
-function [xnew, ynew]=Ordenar(xold,yold)
-% Arranges xold and yold in incremental
-% values of xold 
+function [xnew, ynew] = Ordenar(xold, yold)
+% Ordenar.m: Arranges an (x, y) array in incremental values of x.
+%
+% Input parameters:
+%   - xold, yold
+%
+% Output parameters:
+%   - xnew, ynew
+%
+% Comments and suggestions: 
+% Javier Sotres
+% Department of Biomedical Science
+% Malmoe University, Malmoe, Sweden 
+% Email: javier.sotres@mau.se
+% http://www.mah.se/sotres
 
 % number of rows of xold
 n_rows = max(size(xold));

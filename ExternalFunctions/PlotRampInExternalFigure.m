@@ -1,4 +1,25 @@
-function PlotRampInExternalFigure(FZ, RampXRepresentation, RampYRepresentation, RampDirection)
+function PlotRampInExternalFigure(FZ, RampXRepresentation,...
+    RampYRepresentation, RampDirection)
+% PlotRampInExternalFigure.m: plots in an external figure the ramp plotted
+% in the software FSAS.
+%
+% Input Parameters:
+%   - FZ -> Object of ForceRamp class
+%   - RampXRepresentation -> representation of the X axis of the ramp (1:
+%   sample vertical positions; 2: offset corrected sample vertical
+%   positions; 3: probe-sample distance).
+%   - RampYRepresentation -> representation of the Y axis of the ramp (1:
+%   photodetector values; 2: offset corrected photodetector values; 3:
+%   cantilever deflection; 4: force).
+%   - RampDirection -> direction of the force ramp (1: sample approaching
+%   the probe; 2: sample withdrawing from the probe).
+%
+% Comments and suggestions: 
+% Javier Sotres
+% Department of Biomedical Science
+% Malmoe University, Malmoe, Sweden 
+% Email: javier.sotres@mau.se
+% http://www.mah.se/sotres
 
 % Creates new figure
 figure;

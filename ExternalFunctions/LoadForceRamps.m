@@ -2,11 +2,11 @@ function Ramp = LoadForceRamps(FileNames, FilePath)
 % LoadForceRamps.m: Reads Nanoscope 5 force volume files.
 %
 % Input parameters:
-%   FileNames -> Name of the files to be read.
-%   FilePath -> Path where the files to be read are.
+%   - FileNames -> Name of the files to be read.
+%   - FilePath -> Path where the files to be read are.
 %
 % Output parameter:
-%   Ramp -> cell array with {number_of_files, 1} dimensions where each
+%   - Ramp -> cell array with {number_of_files, 1} dimensions where each
 %   member is an object of ForceRamp class.
 %
 % Based on the scripts developed by Jaco de Groot,available at: 

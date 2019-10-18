@@ -1,28 +1,29 @@
 function HeaderValues = ReadHeaderValues(FileName,SearchString)
-
-% ReadHeaderValues version 0.1.
+% ReadHeaderValues.m: Reads Values in Header Text of Nanoscope 5 force 
+% volume files.
 %
-% Last updated: 08-10-2019 by Javier Sotres. 
+% Input parameters:
+%   - FileName -> Name of the force volume file.
+%   - SearchString -> cell array containing strings that are located in the
+%                     force volume file header, in the same line where 
+%                     quantities of interest are, therefore serving as an 
+%                     identifier to lacate and read these quantities.
 %
-% Reads Values in Header Text of Nanoscope 5 force volume files. Based on 
-% the script developed by Jaco de Groot,available at: 
+% OutputParameters: 
+%   - HeaderValues -> Values of interest located in the force volume file
+%                     header.
+%
+% Based on the script developed by Jaco de Groot,available at: 
 % https://se.mathworks.com/matlabcentral/fileexchange/11515-open-nanoscope-6-afm-images
 %
-% This function/script is authorized for use in government and academic
-% research laboratories and non-profit institutions only. Though this
-% function has been tested prior to its posting, it may contain mistakes or
-% require improvements. In exchange for use of this free product, we 
-% request that its use and any issues that may arise be reported to us. 
-% Comments and suggestions are therefore welcome and should be sent to: 
-% 
+% Comments and suggestions: 
 % Javier Sotres
-% Biomedical Science, 
-% Faculty of Health and Society, Malmo University
-% Malmo, Sweden 
+% Department of Biomedical Science
+% Malmoe University, Malmoe, Sweden 
 % Email: javier.sotres@mau.se
 % http://www.mah.se/sotres
 
-% Opens the filefor reading and return an error if unseccesful
+% Opens the filefor reading and return an error if unsuccesful
 fid = fopen(FileName,'r');
 [message,errnum] = ferror(fid);
 if(errnum)

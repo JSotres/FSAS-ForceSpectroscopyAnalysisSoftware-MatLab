@@ -4,16 +4,16 @@ function [Ramp, NumberOfMapRows,...
 % LoadNanoScope5ForceVolumeFiles.m: Reads Nanoscope 5 force volume files. 
 % 
 % Input parametrs:
-%   FileNames -> Name of the force volume file to be read.
-%   FilePath -> Path where the file to be read is.
+%   - FileNames -> Name of the force volume file to be read.
+%   - FilePath -> Path where the file to be read is.
 %
 % Output parameters:
-%   Ramp -> cell array with {number_of_rows, number_of_columns} dimensions
-%   where each member is an object of ForceRamp class.
-%   NumberOfMapRows -> number of rows of the force volume measurement.
-%   NumberOfMapColumns -> number of columns of the force volume
-%   measurement.
-%   MapLength -> lateral scan size of the force volume measurement.
+%   - Ramp -> cell array with {number_of_rows, number_of_columns} dimensions
+%             where each member is an object of ForceRamp class.
+%   - NumberOfMapRows -> number of rows of the force volume measurement.
+%   - NumberOfMapColumns -> number of columns of the force volume
+%                           measurement.
+%   - MapLength -> lateral scan size of the force volume measurement.
 %
 % Based on the scripts developed by Jaco de Groot,available at: 
 % https://se.mathworks.com/matlabcentral/fileexchange/11515-open-nanoscope-6-afm-images

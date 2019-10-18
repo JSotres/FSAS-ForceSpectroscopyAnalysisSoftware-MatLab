@@ -1,6 +1,7 @@
 function CustomHistogram(Quantity,Representation, Min, Max, NBins)
 % CustomHistogram.m: plots in an external figure a normalized histogram.
-% Inout variables:
+%
+% Input variables:
 %   - Quantity -> quantity to be used for calculating the histogram
 %   - Representation -> indicates the quantity to be plotted and sets the
 %   label of the x-axis accordingly. As it is the FSAS software  that calls
@@ -18,12 +19,10 @@ function CustomHistogram(Quantity,Representation, Min, Max, NBins)
 %   plotting the histogram.
 %   - NBins -> number of bins in the histogram.
 % 
-% Last updated: 17-10-2019 by Javier Sotres.
-%
+% Comments and suggestions: 
 % Javier Sotres
-% Biomedical Science, 
-% Faculty of Health and Society, Malmo University
-% Malmo, Sweden 
+% Department of Biomedical Science
+% Malmoe University, Malmoe, Sweden 
 % Email: javier.sotres@mau.se
 % http://www.mah.se/sotres
 

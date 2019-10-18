@@ -1,23 +1,31 @@
 function [zSens, dataType, SamplesPerLine,...
     RampSize, DataLength, DataOffset] =...
-    ReadRampHeaderValues(FileName,searchstring)
-% ReadRampHeaderValues. Last updated: 08-10-2019 by Javier Sotres. 
+    ReadRampHeaderValues(FileName, searchstring)
+% ReadRampHeaderValues.m: Reads Values in Header Text of Nanoscope force
+% ramp files.
 %
-% Reads Values in Header Text of Nanoscope 5 force volume files. Based on 
-% the script developed by Jaco de Groot,available at: 
+% Input parameters:
+%   - FileName -> Name of the force volume file.
+%   - searchstring -> cell array containing strings that are located in the
+%                     force volume file header, in the same line where 
+%                     quantities of interest are, therefore serving as an 
+%                     identifier to lacate and read these quantities.
+%
+% Output parameters:
+%   - zSens -> sensitivity in the Z direction
+%   - dataType -> type of Y data in the force ramp
+%   - SamplesPerLine -> number of points in the force ramp
+%   - RampSize -> length of the ramp
+%   - DataLength -> size of binary data corresponding to the force ramp
+%   - DataOffset -> position of the binary data in the force ramp file
+%
+% Based on the scripts developed by Jaco de Groot,available at: 
 % https://se.mathworks.com/matlabcentral/fileexchange/11515-open-nanoscope-6-afm-images
 %
-% This function/script is authorized for use in government and academic
-% research laboratories and non-profit institutions only. Though this
-% function has been tested prior to its posting, it may contain mistakes or
-% require improvements. In exchange for use of this free product, we 
-% request that its use and any issues that may arise be reported to us. 
-% Comments and suggestions are therefore welcome and should be sent to: 
-% 
+% Comments and suggestions: 
 % Javier Sotres
-% Biomedical Science, 
-% Faculty of Health and Society, Malmo University
-% Malmo, Sweden 
+% Department of Biomedical Science
+% Malmoe University, Malmoe, Sweden 
 % Email: javier.sotres@mau.se
 % http://www.mah.se/sotres
 
