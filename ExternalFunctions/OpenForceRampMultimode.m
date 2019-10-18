@@ -1,10 +1,6 @@
 function [XF, YF, XB, YB] = OpenForceRampMultimode(file_name)
-% OpenForceRampMultimode: Reading of Force Ramps obtained with Multimode 
+% OpenForceRampMultimode.m: Reading of Force Ramps obtained with Multimode 
 % SPMs
-% Last updated: 13-10-2019 by Javier Sotres
-% 
-% Based on the routine OpenNano6 by Jaco de Groot for reading NanoScope 6
-% files available at MathWorks.
 %
 % Input Parameter:
 %   file_name -> name of the force ramp file to be read
@@ -19,9 +15,15 @@ function [XF, YF, XB, YB] = OpenForceRampMultimode(file_name)
 %   YB -> 1D array of the absolute photodetector values while withdrawing
 %         from the probe (backward direction).
 % 
-% Author: Javier Sotres
-% email: javier.sotres@mau.se
-% url: mah.se/sotres
+% Based on the scripts developed by Jaco de Groot,available at: 
+% https://se.mathworks.com/matlabcentral/fileexchange/11515-open-nanoscope-6-afm-images
+%
+% Comments and suggestions: 
+% Javier Sotres
+% Department of Biomedical Science
+% Malmoe University, Malmoe, Sweden 
+% Email: javier.sotres@mau.se
+% http://www.mah.se/sotres
 
 % Defines the strings to be searched in the ramp files, they are found in
 % the beginning of lones where relevant information is found

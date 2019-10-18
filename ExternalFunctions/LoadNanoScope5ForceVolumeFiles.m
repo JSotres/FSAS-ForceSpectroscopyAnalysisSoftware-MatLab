@@ -1,26 +1,27 @@
 function [Ramp, NumberOfMapRows,...
     NumberOfMapColumns, MapLength] = ...
     LoadNanoScope5ForceVolumeFiles(FileName, FilePath)
-
-% LoadNanoScope5ForceVolumeFiles version 0.1.
-%
-% Last updated: 09-10-2019 by Javier Sotres. 
-%
-% Reads Nanoscope 5 force volume files. Based on the script developed by
-% Jaco de Groot,available at: 
-% https://se.mathworks.com/matlabcentral/fileexchange/11515-open-nanoscope-6-afm-images
-%   
-% This function/script is authorized for use in government and academic
-% research laboratories and non-profit institutions only. Though this
-% function has been tested prior to its posting, it may contain mistakes or
-% require improvements. In exchange for use of this free product, we 
-% request that its use and any issues that may arise be reported to us. 
-% Comments and suggestions are therefore welcome and should be sent to: 
+% LoadNanoScope5ForceVolumeFiles.m: Reads Nanoscope 5 force volume files. 
 % 
+% Input parametrs:
+%   FileNames -> Name of the force volume file to be read.
+%   FilePath -> Path where the file to be read is.
+%
+% Output parameters:
+%   Ramp -> cell array with {number_of_rows, number_of_columns} dimensions
+%   where each member is an object of ForceRamp class.
+%   NumberOfMapRows -> number of rows of the force volume measurement.
+%   NumberOfMapColumns -> number of columns of the force volume
+%   measurement.
+%   MapLength -> lateral scan size of the force volume measurement.
+%
+% Based on the scripts developed by Jaco de Groot,available at: 
+% https://se.mathworks.com/matlabcentral/fileexchange/11515-open-nanoscope-6-afm-images
+%
+% Comments and suggestions: 
 % Javier Sotres
-% Biomedical Science, 
-% Faculty of Health and Society, Malmo University
-% Malmo, Sweden 
+% Department of Biomedical Science
+% Malmoe University, Malmoe, Sweden 
 % Email: javier.sotres@mau.se
 % http://www.mah.se/sotres
 
@@ -84,7 +85,7 @@ FZS = fread(fid,...
 % Initializes a counter indicating the number of force distance curves
 counter = 0;
 % Loads each of the force diatance ramps contained in FZS in the
-% structure Scan(NXPixel,NYPixel)
+% ForceRamp objects Ramp{NXPixel,NYPixel}
 for NXPixel=1:NumberOfMapRows
     for NYPixel=1:NumberOfMapColumns
         % Each fz ramp is declared as an instance of the class
