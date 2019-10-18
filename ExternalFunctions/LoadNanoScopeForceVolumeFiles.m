@@ -1,7 +1,7 @@
 function [Ramp, NumberOfMapRows,...
     NumberOfMapColumns, MapLength] = ...
-    LoadNanoScope5ForceVolumeFiles(FileName, FilePath)
-% LoadNanoScope5ForceVolumeFiles.m: Reads Nanoscope 5 force volume files. 
+    LoadNanoScopeForceVolumeFiles(FileName, FilePath)
+% LoadNanoScope5ForceVolumeFiles.m: Reads Nanoscope force volume files. 
 % 
 % Input parametrs:
 %   - FileNames -> Name of the force volume file to be read.

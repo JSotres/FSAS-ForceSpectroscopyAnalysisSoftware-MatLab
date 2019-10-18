@@ -23,7 +23,7 @@ classdef ForceVolumeClass < handle
                 % LoadNanoScope5ForceVolumeFiles
                     [fv.Ramp, fv.NumberOfMapRows, ...
                         fv.NumberOfMapColumns, fv.MapLength] =...
-                        LoadNanoScope5ForceVolumeFiles(FileName, FilePath);
+                        LoadNanoScopeForceVolumeFiles(FileName, FilePath);
                 case 2                    
                 % This indicates that the object corresponds to a list of
                 % force distance ramps, and it is created by calling the 
