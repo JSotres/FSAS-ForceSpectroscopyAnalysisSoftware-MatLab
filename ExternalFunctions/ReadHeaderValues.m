@@ -48,26 +48,52 @@ while( and( ~eof, ~header_end ) )
         q = [];
         w = [];
         % If the line contains the search string go into the IF condition
-        if findstr(SearchString(ij).label,line)
-            % Finds the integers in the string line, and stores them in
-            % the cell array q
-            q = regexp(line,'\d*','Match');
-            % Converts the strings in q to numbers
-            for i = 1:length(q)
-                w(i) = str2double(q{i});
-            end
-            % If the line contains the strings 'LSB' or '@', just store the
-            % last number of the string. If not, store all numerical values
-            if ~isempty(findstr('LSB',line)) || ~isempty(findstr('@',line))
-                value = str2double(strcat(q{length(q)-1},...
-                    '.',...
-                    q{length(q)}));
-            	HeaderValues(ij).values(ValueCounter(ij)) = value;
-            	ValueCounter(ij) = ValueCounter(ij)+1;
+        if ij == 7
+            if findstr(SearchString(ij).label{1},line)
+                condition = true;
+            elseif findstr(SearchString(ij).label{2},line)
+                condition = true;
             else
-                for j=1:length(w)
-                    HeaderValues(ij).values(ValueCounter(ij)) = w(j);
+                condition = false;
+            end
+        else
+            condition = findstr(SearchString(ij).label,line);
+        end
+        if condition
+            if ij == 7
+                line
+            end
+            if ij == 11
+                m = split(line,'Ciao ');
+                m = split(m(2),' list');
+                HeaderValues(ij).values(ValueCounter(ij)) = m(1);
+                ValueCounter(ij) = ValueCounter(ij)+1;
+            elseif ij == 10
+                m = split(line,'"');
+                HeaderValues(ij).values(ValueCounter(ij)) = m(2);
+                ValueCounter(ij) = ValueCounter(ij)+1;
+            else
+                % Finds the integers in the string line, and stores them in
+                % the cell array q
+                q = regexp(line,'\d*','Match');
+                % Converts the strings in q to numbers
+                for i = 1:length(q)
+                    w(i) = str2double(q{i});
+                end
+            
+                % If the line contains the strings 'LSB' or '@', just store the
+                % last number of the string. If not, store all numerical values
+                if ~isempty(findstr('LSB',line)) || ~isempty(findstr('@',line))
+                    value = str2double(strcat(q{length(q)-1},...
+                        '.',...
+                        q{length(q)}));
+                    HeaderValues(ij).values(ValueCounter(ij)) = value;
                     ValueCounter(ij) = ValueCounter(ij)+1;
+                else
+                    for j=1:length(w)
+                        HeaderValues(ij).values(ValueCounter(ij)) = w(j);
+                        ValueCounter(ij) = ValueCounter(ij)+1;
+                    end
                 end
             end
         end

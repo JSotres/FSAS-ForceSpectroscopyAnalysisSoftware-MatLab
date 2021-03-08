@@ -1,6 +1,6 @@
 function [Ramp, NumberOfMapRows,...
     NumberOfMapColumns, MapLength] = ...
-    LoadNanoScopeForceVolumeFiles(FileName, FilePath)
+    LoadNanoScopeForceVolumeFiles(FileName, FilePath, storage)
 % LoadNanoScope5ForceVolumeFiles.m: Reads Nanoscope force volume files. 
 % 
 % Input parametrs:
@@ -23,7 +23,7 @@ function [Ramp, NumberOfMapRows,...
 % Department of Biomedical Science
 % Malmoe University, Malmoe, Sweden 
 % Email: javier.sotres@mau.se
-% http://www.mah.se/sotres
+% https://www.jsotres.com
 
 %--------------------------------------------------------------------------
 % Add and move to the input file path route
@@ -39,9 +39,12 @@ searchstring(3).label='Samps/line:';
 searchstring(4).label='Data offset';
 searchstring(5).label='Scan Size:';
 searchstring(6).label='@Z magnify:';
-searchstring(7).label='\@4:Ramp size:';
+searchstring(7).label{1}='\@4:Ramp size:';
+searchstring(7).label{2}='\@4:Ramp Size:';
 searchstring(8).label='\Force Data Points:';
 searchstring(9).label='\Number of lines:';
+searchstring(10).label=':Image Data';
+searchstring(11).label='Ciao';
 
 %--------------------------------------------------------------------------
 %Reads from the force volume file the values corresponding to the search
@@ -50,12 +53,22 @@ param = ReadHeaderValues(FileName,searchstring);
 
 %--------------------------------------------------------------------------
 % Assign read parameters to variables for easy code reading
-NumberOfMapRows = param(9).values(2);
-NumberOfMapColumns = param(3).values(7);
+NumberOfMapRows = param(9).values(1);
+NumberOfMapColumns = param(3).values(1);
 MapLength = param(5).values(1);
 RampLength=param(7).values(1)*param(1).values(1);
 NumberOfRampPoints = param(3).values(2);
 ScanIncrement = RampLength/(NumberOfRampPoints-1);
+
+for g = 1:length(param(11).values)
+    if isequal(param(11).values{g},'force image')
+        forceVolumeDataOffsetIndex = g-2;
+    elseif isequal(param(11).values{g},'image')
+        if isequal(param(10).values{g-1},'Height')
+            topographyDataOffsetIndex = g-2;
+        end
+    end
+end
 
 %--------------------------------------------------------------------------
 % Creates two variables accounting for the two laterla dimensions of each
@@ -63,14 +76,20 @@ ScanIncrement = RampLength/(NumberOfRampPoints-1);
 PixelLengthColumn = MapLength/NumberOfMapRows;
 PixelLengthRow = MapLength/NumberOfMapColumns;
 
+if storage == 16
+    resol = 'int16'
+elseif storage == 32
+    resol = 'int32'
+end
+
 %--------------------------------------------------------------------------
 % Opens the file and goes to the position where the topography map is    
 fid = fopen(FileName,'r');
-fseek(fid,param(4).values(1),-1);
+fseek(fid,param(4).values(topographyDataOffsetIndex),-1);
 % Loads the topography map in a 2d array
 topography =...
     (param(1).values(1) * param(2).values(1) *...
-    fread(fid, [param(3).values(1) param(3).values(1)],'int16'))/(65535+1);
+    fread(fid, [param(3).values(1) param(3).values(1)],resol))/(65535+1);
 % Flip the topography map 90 degrees
 topography =...
     flipdim(rot90(topography,3),2);
@@ -78,10 +97,10 @@ topography =...
 %--------------------------------------------------------------------------
 % Opens the file and goes to the position where the binary data of
 % the Force Volume map is and loads it into the "FZS" variable
-fseek(fid,param(4).values(2),-1);
+fseek(fid,param(4).values(forceVolumeDataOffsetIndex),-1);
 FZS = fread(fid,...
     [2*NumberOfRampPoints NumberOfMapRows*NumberOfMapColumns],...
-    'int16');
+    resol);
 % Initializes a counter indicating the number of force distance curves
 counter = 0;
 % Loads each of the force diatance ramps contained in FZS in the

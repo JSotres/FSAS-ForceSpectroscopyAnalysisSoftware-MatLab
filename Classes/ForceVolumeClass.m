@@ -14,7 +14,7 @@ classdef ForceVolumeClass < handle
     end
     
     methods (Access = public)
-        function fv = ForceVolumeClass(FileName, FilePath, creationMethod)
+        function fv = ForceVolumeClass(FileName, FilePath, creationMethod, storage)
             % Construct an instance of this class
             switch creationMethod
                 case 1
@@ -23,7 +23,7 @@ classdef ForceVolumeClass < handle
                 % LoadNanoScope5ForceVolumeFiles
                     [fv.Ramp, fv.NumberOfMapRows, ...
                         fv.NumberOfMapColumns, fv.MapLength] =...
-                        LoadNanoScopeForceVolumeFiles(FileName, FilePath);
+                        LoadNanoScopeForceVolumeFiles(FileName, FilePath, storage);
                 case 2                    
                 % This indicates that the object corresponds to a list of
                 % force distance ramps, and it is created by calling the 
