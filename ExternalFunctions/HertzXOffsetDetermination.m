@@ -29,7 +29,7 @@ function [E, x0, xData, yData] =...
 % Department of Biomedical Science
 % Malmoe University, Malmoe, Sweden 
 % Email: javier.sotres@mau.se
-% http://www.mah.se/sotres
+% https://www.jsotres.com
 
 % It require arranging xData and Ydata in incremental
 % values of xData, which is done by calling the external
