@@ -60,9 +60,6 @@ while( and( ~eof, ~header_end ) )
             condition = findstr(SearchString(ij).label,line);
         end
         if condition
-            if ij == 7
-                line
-            end
             if ij == 11
                 m = split(line,'Ciao ');
                 m = split(m(2),' list');

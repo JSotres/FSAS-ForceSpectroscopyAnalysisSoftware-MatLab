@@ -77,9 +77,9 @@ PixelLengthColumn = MapLength/NumberOfMapRows;
 PixelLengthRow = MapLength/NumberOfMapColumns;
 
 if storage == 16
-    resol = 'int16'
+    resol = 'int16';
 elseif storage == 32
-    resol = 'int32'
+    resol = 'int32';
 end
 
 %--------------------------------------------------------------------------
