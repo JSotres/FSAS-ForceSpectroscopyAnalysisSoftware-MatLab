@@ -88,7 +88,7 @@ while( and( ~eof, ~header_end ) )
                 end
                 SamplesPerLine{RampCounter(4)} = w;
                 Parameters_Found=Parameters_Found+1;
-            elseif findstr(searchstring(3).label,line) 
+            elseif contains(line,searchstring(3).label{1}) || contains(line,searchstring(3).label{2})
                 q = regexp(line,'\d*','Match');
                 % Increments ValueCounter
                 RampCounter(3)=RampCounter(3)+1;
@@ -98,7 +98,7 @@ while( and( ~eof, ~header_end ) )
                     q{length(q)}));
                 Parameters_Found=Parameters_Found+1;
             elseif findstr(searchstring(2).label,line)
-                q = regexp(line,'\d*','Match');
+                q = regexp(line,'\d*','Match')
                 % Increments ValueCounter
                 RampCounter(2)=RampCounter(2)+1;
                 DataLength(RampCounter(2)) = str2double(q{1});

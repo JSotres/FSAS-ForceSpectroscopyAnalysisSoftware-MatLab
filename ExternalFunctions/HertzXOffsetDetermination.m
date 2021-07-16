@@ -1,5 +1,5 @@
-function [E, x0, xData, yData] =...
-    HertzXOffsetDetermination (xOriginal, yOriginal, kc, R, PoissonRatio)
+function [E, x0, xDataFull, YDataFull] =...
+    HertzXOffsetDetermination (xOriginal, yOriginal, xOriginalFull, yOriginalFull,kc, R, PoissonRatio)
 % HertzXOffsetDetermination.m: Fits provided data with the Hertz Contact 
 % Model (sphere-plane).
 %
@@ -36,6 +36,8 @@ function [E, x0, xData, yData] =...
 % function "Ordenar" 
 [xData,Ydata] = Ordenar(xOriginal,yOriginal);
 
+[xDataFull,YDataFull] = Ordenar(xOriginalFull, yOriginalFull);
+
 % The function corresponding to the Hertz fit is defined
 Hertz_FitType = fittype(@(K2,Z0,x) -K2*x.^(2/3)-x+Z0);
 % And the fit is performed
@@ -43,20 +45,22 @@ Fit1 = fit(xData, Ydata, Hertz_FitType, 'StartPoint',[0.5 20]);
 
 Coefficients = coeffvalues(Fit1);
 if Coefficients(1)>0
-    % If the K2 parameter is positive, the Younf modulus and contact
-    % position (output parametes) are assigned
+    % If the K2 parameter is positive, the Young modulus and contact
+    % position (output parametes) are assigned. We also output the 
+    % reduced Young modulus, Et, which will be used to calculate the
+    % contact radius later on
     E = 3*(1-PoissonRatio^2)*kc/(4*R^(0.5)*Coefficients(1)^(3/2));
     x0 = Coefficients(2);
 else
     % If the K2 parameter is negative, which will happen if the slope of
     % the contact region is lower than the photodetector sensitivity, the
-    % output Young modulus and contact positions are assigned NaN values
+    % output Young moduli and contact positions are assigned NaN values
     E = NaN;
     x0 = NaN;
 end
 
 % The output X and Y values of the Hertz fit are calculated
-xData = 0:0.1:max(xData);
-yData = -Coefficients(1)*xData.^(2/3)-xData;
+xDataFull = 0:0.1:max(xDataFull);
+YDataFull = -Coefficients(1)*xDataFull.^(2/3)-xDataFull;
 
 end

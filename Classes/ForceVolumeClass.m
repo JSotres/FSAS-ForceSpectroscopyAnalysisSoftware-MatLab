@@ -28,7 +28,7 @@ classdef ForceVolumeClass < handle
                 % This indicates that the object corresponds to a list of
                 % force distance ramps, and it is created by calling the 
                 % function LoadForceRamps
-                    fv.Ramp = LoadForceRamps(FileName, FilePath);
+                    fv.Ramp = LoadForceRamps(FileName, FilePath, storage);
                     % Identification of the number of Ramps, number
                     % assigned to NumberOfMapRows in order to keep the same
                     % nomenclature as in the case of analysis of force

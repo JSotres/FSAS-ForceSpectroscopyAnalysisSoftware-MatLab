@@ -1,4 +1,4 @@
-function Ramp = LoadForceRamps(FileNames, FilePath)
+function Ramp = LoadForceRamps(FileNames, FilePath, storage)
 % LoadForceRamps.m: Reads Nanoscope 5 force volume files.
 %
 % Input parameters:
@@ -24,6 +24,7 @@ function Ramp = LoadForceRamps(FileNames, FilePath)
 addpath(FilePath);
 cd(FilePath);
 %--------------------------------------------------------------------------
+
 
 % Retrieve the number of loaded force ramps
 if iscell(FileNames)
@@ -73,12 +74,12 @@ for i=1:NumberOfFiles
     if NumberOfFiles > 1
         % in the case several files/ramps are to be read
         [Ramp{i, 1}.XF Ramp{i, 1}.YF Ramp{i, 1}.XB Ramp{i, 1}.YB] =...
-            OpenForceRampMultimode(FileNames{i});
+            OpenForceRampMultimode(FileNames{i}, storage);
         Ramp{i, 1}.Title = FileNames{i};
     elseif NumberOfFiles == 1
         % in the case only one file/ramp is to be read
         [Ramp{i, 1}.XF Ramp{i, 1}.YF Ramp{i, 1}.XB Ramp{i, 1}.YB] =...
-            OpenForceRampMultimode(FileNames);
+            OpenForceRampMultimode(FileNames, storage);
         Ramp{i, 1}.Title = FileNames;
     end
     

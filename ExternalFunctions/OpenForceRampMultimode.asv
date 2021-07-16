@@ -77,6 +77,7 @@ end
 fid = fopen(file_name,'r');
 
 for i = 1:numberOfRamps
+    i
     % Go thorugh all ramps in the file and identify the one containing
     % "Deflection Error" data
 	if strcmp(dataType(i), 'Deflection Error') == 1
@@ -94,17 +95,35 @@ for i = 1:numberOfRamps
         % ramps, create the X(F/B)(:,1) (sample displacement positions)
         % and Y(F/B)(:,1), absolute photodetector values, of the ramps,
         % both in the forward and backward directions.
-        rr=size(CurveRawData(i).Data);
-        n_points=rr(1)/2;
-        XF = ones(n_points, 3) * NaN;
+        rr=size(CurveRawData(i).Data)
+        rr=rr(1)/2
+        rr1=samplesPerLine{i}(1)
+        rr2=samplesPerLine{i}(2)
+        storage
+        bpp
+        resol
+        XF = ones(rr, 3) * NaN;
         XB = XF;
-        YF = ones(n_points, 4) * NaN;
+        YF = ones(rr, 4) * NaN;
         YB = YF;
-        XF(:,1) = (1:n_points)*JumpStep;
-        XB(:,1) = (1:n_points)*JumpStep;
-        YF(:,1) =...
-            0.000375 * CurveRawData(i).Data(1:n_points);
+        XF(:,1) = (1:rr)*JumpStep;
+        XB(:,1) = (1:rr)*JumpStep;
+        YF(1:samplesPerLine{i}(2),1) =...
+            0.000375 * CurveRawData(i).Data(1:rr);
+        size(YB(:,1))
+        size(CurveRawData(i).Data(rr/2+1:end))
         YB(:,1) = 0.000375 *...
-            CurveRawData(i).Data(n_points+1:end);
+            CurveRawData(i).Data(rr/2+1:end);
+        %XF = ones(size(CurveRawData(i).Data,1)/(2*bpp), 3) * NaN;
+        %XB = XF;
+        %YF = ones(size(CurveRawData(i).Data,1)/(2*bpp), 4) * NaN;
+        %YB = YF;
+        %XF(:,1) = (1:samplesPerLine{i}(1))*JumpStep;
+        %XB(:,1) = (1:samplesPerLine{i}(1))*JumpStep;
+        %YF(1:samplesPerLine{i}(2),1) =...
+            %0.000375 * CurveRawData(i).Data(1:samplesPerLine{i}(2));
+        %YB(:,1) = 0.000375 *...
+            %CurveRawData(i).Data(samplesPerLine{i}(2)+1:end);
+            %CurveRawData(i).Data(size(CurveRawData(i).Data,1)/4+1:end);
     end
 end

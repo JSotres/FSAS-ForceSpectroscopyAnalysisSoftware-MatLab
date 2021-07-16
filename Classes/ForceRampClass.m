@@ -36,7 +36,7 @@ classdef ForceRampClass < handle
         % 3 -> height
         % 4 -> selected
         % 5 -> slope of linear fit
-        % 6 -> Young modulus
+        % 6 -> sample Young modulus
         % 7 -> contact point
         % 8 -> maximum adhesion
         % 9 -> adhesion work
@@ -124,12 +124,13 @@ classdef ForceRampClass < handle
                 FromRange2Indexes(fz.XF(:,1),param.xForwardMin, param.xForwardMax);
             
             % Call the HertzXOffsetDetermination function, which returns
-            % the Young modulus, Property(6), the contact point,
-            % Property(7), and the X and Y values of the Hertz fit, HertzY
-            % and HertzX
+            % the sample Young modulus, Property(6), the contact point,
+            % Property(7), and the X and Y values of the Hertz fit, 
+            % HertzY and HertzX
             [fz.Property(6) , fz.Property(7), HertzY, HertzX] =...
                 HertzXOffsetDetermination(...
                 fz.YF(IndMinF:IndMaxF,3), fz.XF(IndMinF:IndMaxF,1),...
+                fz.YF(:,3), fz.XF(:,1),...
                 param.SpringConstant, param.ProbeRadius,...
                 param.PoissonRatio);
             
